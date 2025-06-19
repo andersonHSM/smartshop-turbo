@@ -17,19 +17,17 @@ services:
 
   frontend:
     build:
-      context: .
-      dockerfile: ./apps/frontend/Dockerfile
+      context: ./apps/frontend
     container_name: smartshopper-frontend
-    restart: always
+    restart: unless-stopped
     env_file: .env
     environment:
-      - POSTGRES_URL=postgres://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@db:5432/smartshopper
-      - OPENAI_API_KEY=${OPENAI_API_KEY}
-      - NEXT_PUBLIC_API_URL=http://localhost:3001
+      NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:3000}
     ports:
-      - "3001:3001"
+      - "3001:3000"
     depends_on:
-      - db
+      - backend
+    command: npm run build && npm start
 
   backend:
     build:
@@ -47,20 +45,6 @@ services:
     ports:
       - "3000:3000"
     command: npm run start:prod
-
-  frontend:
-    build:
-      context: ./apps/frontend
-    container_name: smartshopper-frontend
-    restart: unless-stopped
-    env_file: .env
-    environment:
-      NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:3000}
-    ports:
-      - "3001:3000"
-    depends_on:
-      - backend
-    command: npm run build && npm start
 
 volumes:
   pgdata:
