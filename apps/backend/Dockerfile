@@ -11,11 +11,12 @@ FROM base AS deps
 WORKDIR /app
 
 # Copy package files
-COPY package.json pnpm-lock.yaml* pnpm-workspace.yaml* .npmrc* ./
+COPY package.json pnpm-lock.yaml* pnpm-workspace.yaml* ./
+COPY .npmrc ./
 COPY apps/backend/package.json ./apps/backend/
 
 # Install dependencies
-RUN pnpm install --frozen-lockfile
+RUN pnpm install --frozen-lockfile --shamefully-hoist
 
 # Rebuild the source code only when needed
 FROM base AS builder
