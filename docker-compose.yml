@@ -5,22 +5,40 @@ services:
     image: ankane/pgvector
     container_name: pgvector-db
     restart: always
+    env_file: .env
     environment:
       POSTGRES_DB: smartshopper
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
     ports:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
+
+  frontend:
+    build:
+      context: .
+      dockerfile: ./apps/frontend/Dockerfile
+    container_name: smartshopper-frontend
+    restart: always
+    env_file: .env
+    environment:
+      - POSTGRES_URL=postgres://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@db:5432/smartshopper
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - NEXT_PUBLIC_API_URL=http://localhost:3001
+    ports:
+      - "3001:3001"
+    depends_on:
+      - db
 
   backend:
     build:
       context: ./apps/backend
     container_name: smartshopper-backend
     restart: unless-stopped
+    env_file: .env
     environment:
-      DATABASE_URL: postgres://postgres:postgres@db:5432/smartshopper
+      DATABASE_URL: ${DATABASE_URL:-postgres://postgres:postgres@db:5432/smartshopper}
       OPENAI_API_KEY: ${OPENAI_API_KEY}
       AIRTABLE_API_KEY: ${AIRTABLE_API_KEY}
       AIRTABLE_BASE_ID: ${AIRTABLE_BASE_ID}
@@ -35,8 +53,9 @@ services:
       context: ./apps/frontend
     container_name: smartshopper-frontend
     restart: unless-stopped
+    env_file: .env
     environment:
-      NEXT_PUBLIC_API_URL: http://localhost:3000
+      NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:3000}
     ports:
       - "3001:3000"
     depends_on:
