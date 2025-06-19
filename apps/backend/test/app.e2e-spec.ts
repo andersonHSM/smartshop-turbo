@@ -1,8 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication, ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import * as request from 'supertest';
-import { AppModule } from './../src/app.module';
+import request from 'supertest';
+import { AppModule } from '../src/app.module';
 import { CONFIG_NAMESPACE } from '../src/config/config.constants';
 
 describe('AppController (e2e)', () => {

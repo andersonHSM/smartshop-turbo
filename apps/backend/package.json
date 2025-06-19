@@ -1,5 +1,5 @@
 {
-	"name": "@repo/backend",
+	"name": "backend",
 	"version": "1.0.0",
 	"private": true,
 	"scripts": {
@@ -30,6 +30,7 @@
 		"swagger-ui-express": "^5.0.0"
 	},
 	"devDependencies": {
+		"@repo/typescript-config": "workspace:*",
 		"@nestjs/cli": "^10.2.1",
 		"@nestjs/schematics": "^10.0.3",
 		"@nestjs/testing": "^10.2.10",
