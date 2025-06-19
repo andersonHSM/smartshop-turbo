@@ -1,12 +1,12 @@
 {
   "name": "smartshopper-turbo",
   "private": true,
-  "workspaces": ["apps/*"],
   "devDependencies": {
     "turbo": "^1.10.0"
   },
   "scripts": {
-    "dev": "turbo run dev",
+    "dev": "turbo run dev --no-daemon",
     "build": "turbo run build"
-  }
+  },
+  "packageManager": "pnpm@8.6.0"
 }

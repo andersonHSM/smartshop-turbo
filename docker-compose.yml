@@ -17,21 +17,22 @@ services:
 
   frontend:
     build:
-      context: ./apps/frontend
+      context: .
+      dockerfile: ./apps/frontend/Dockerfile
     container_name: smartshopper-frontend
     restart: unless-stopped
     env_file: .env
     environment:
       NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:3000}
     ports:
-      - "3001:3000"
+      - "3001:3001"
     depends_on:
       - backend
-    command: npm run build && npm start
 
   backend:
     build:
-      context: ./apps/backend
+      context: .
+      dockerfile: ./apps/backend/Dockerfile
     container_name: smartshopper-backend
     restart: unless-stopped
     env_file: .env
@@ -44,7 +45,6 @@ services:
       - db
     ports:
       - "3000:3000"
-    command: npm run start:prod
 
 volumes:
   pgdata:
