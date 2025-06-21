@@ -1,14 +1,17 @@
 {
+	"extends": "@repo/typescript-config/base.json",
 	"compilerOptions": {
-		"outDir": "./dist",
-		"baseUrl": "./",
+		"module": "ES2022",
 		"experimentalDecorators": true,
-		"emitDecoratorMetadata": true
+		"outDir": "../../dist/apps/backend",
+		"target": "ES2022",
+		"incremental": true,
+		"allowSyntheticDefaultImports": true,
+		"sourceMap": true,
+		"moduleResolution": "node"
 	},
 	"include": [
-		"**/*.ts",
-		"src/**/*.ts",
-		"test/**/*.ts"
+		"src/**/*.ts"
 	],
 	"exclude": [
 		"node_modules",

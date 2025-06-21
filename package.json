@@ -17,5 +17,8 @@
 	"packageManager": "pnpm@10.12.1",
 	"engines": {
 		"node": ">=18"
+	},
+	"dependencies": {
+		"ts-loader": "^9.5.2"
 	}
 }

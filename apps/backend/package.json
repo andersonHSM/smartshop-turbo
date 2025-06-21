@@ -5,8 +5,8 @@
 	"scripts": {
 		"build": "nest build",
 		"format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-		"start": "nest start",
-		"dev": "nest start --turbopack --watch",
+		"start": "cd ../../ && nest start",
+		"dev": "cd ../../ && nest start --turbopack --watch",
 		"start:debug": "nest start --debug --watch",
 		"start:prod": "node dist/main",
 		"lint": "eslint \"{src,apps,libs,test}/**/*.ts\"",
@@ -29,7 +29,8 @@
 		"joi": "^17.13.3",
 		"reflect-metadata": "^0.2.2",
 		"rxjs": "^7.8.2",
-		"swagger-ui-express": "^5.0.1"
+		"swagger-ui-express": "^5.0.1",
+		"prisma": "^6.10.1"
 	},
 	"devDependencies": {
 		"@nestjs/cli": "^11.0.7",
@@ -48,7 +49,6 @@
 		"eslint-plugin-prettier": "^5.5.0",
 		"jest": "^30.0.2",
 		"prettier": "^3.5.3",
-		"prisma": "^6.10.1",
 		"source-map-support": "^0.5.21",
 		"supertest": "^7.1.1",
 		"ts-jest": "^29.4.0",
