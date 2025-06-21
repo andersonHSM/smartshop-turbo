@@ -15,7 +15,7 @@ export class AirtableService {
     }
 
     async fetchProducts(): Promise<{ id: string; name: string; description: string }[]> {
-        const url = `${this.apiUrl}/${this.baseId}/${this.tableName}`;
+        const url = `${this.apiUrl}/${this.tableName}`;
 
         const response = await axios.get(url, {
             headers: {

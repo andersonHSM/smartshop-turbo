@@ -12,20 +12,12 @@ export class OpenAIService {
     }
 
     async embedText(text: string): Promise<Buffer> {
-        const response = await axios.post(
-            'https://api.openai.com/v1/embeddings',
-            {
-                model: 'text-embedding-ada-002',
-                input: text,
-            },
-            {
-                headers: {
-                    Authorization: `Bearer ${this.apiKey}`,
-                },
-            },
-        );
+        const response = await axios.post('http://127.0.0.1:11434/api/embeddings', {
+            model: 'nomic-embed-text',
+            prompt: text,
+        });
 
-        const vector = response.data.data[0].embedding;
+        const vector = response.data.embedding;
         return Buffer.from(Float32Array.from(vector).buffer);
     }
 }
