@@ -1,4 +1,4 @@
-import { CONFIG_NAMESPACE } from './config.constants';
+import {CONFIG_NAMESPACE} from "./config.constants";
 
 export default () => ({
   [CONFIG_NAMESPACE.APP]: {
