@@ -1,6 +1,15 @@
 {
 	"extends": "@repo/typescript-config/base.json",
 	"compilerOptions": {
+		"baseUrl": "src",
+		"paths": {
+			"@root/*": [
+				"../../../*"
+			],
+			"@app/*": [
+				"*"
+			]
+		},
 		"module": "CommonJS",
 		"experimentalDecorators": true,
 		"outDir": "../../dist/apps/backend",
@@ -10,6 +19,7 @@
 		"sourceMap": true,
 		"moduleResolution": "node"
 	},
+
 	"include": [
 		"src/**/*.ts"
 	],
