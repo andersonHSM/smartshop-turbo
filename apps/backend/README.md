@@ -4,7 +4,8 @@ This is a NestJS backend application built with TypeScript.
 
 ## Description
 
-This backend provides RESTful API endpoints to manage users and other resources. It comes with Swagger documentation, validation, and proper error handling.
+This backend provides RESTful API endpoints to manage users and other resources. It comes with Swagger documentation,
+validation, and proper error handling.
 
 ## Installation
 
