@@ -4,7 +4,6 @@
 	"license": "MIT",
 	"version": "0.0.0",
 	"private": true,
-	"type": "module",
 	"scripts": {
 		"dev": "next dev",
 		"db:seed": "ts-node --compiler-options '{\"module\":\"CommonJS\"}' drizzle/seed.ts",
@@ -14,6 +13,7 @@
 	},
 	"dependencies": {
 		"@ai-sdk/openai": "^1.3.22",
+		"@tailwindcss/postcss": "^4.1.10",
 		"@types/node": "24.0.3",
 		"@types/react": "19.1.8",
 		"@types/react-dom": "19.1.6",

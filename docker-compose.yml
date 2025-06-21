@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:17-bookworm
+    container_name: pgvector-db
+    restart: always
+    env_file:
+      - .env
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  backend:
+    build:
+      context: ./apps/backend
+    container_name: smartshopper-backend
+    restart: unless-stopped
+    env_file:
+      - .env
+      - ./apps/backend/.env
+    environment:
+      DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
+    depends_on:
+      - db
+    ports:
+      - "3000:3000"
+    command: npm run start:prod
+
+  frontend:
+    build:
+      context: ./apps/frontend
+    container_name: smartshopper-frontend
+    restart: unless-stopped
+    env_file:
+      - .env
+      - ./apps/frontend/.env
+    ports:
+      - "3001:3000"
+    depends_on:
+      - backend
+    command: npm run build && npm start
+
+volumes:
+  pgdata:
