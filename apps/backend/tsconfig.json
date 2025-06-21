@@ -1,7 +1,7 @@
 {
 	"extends": "@repo/typescript-config/base.json",
 	"compilerOptions": {
-		"module": "ES2022",
+		"module": "CommonJS",
 		"experimentalDecorators": true,
 		"outDir": "../../dist/apps/backend",
 		"target": "ES2022",

@@ -2,9 +2,12 @@
 	"name": "backend",
 	"version": "1.0.0",
 	"private": true,
+	"type": "module",
+	"main": "main.js",
 	"scripts": {
 		"build": "nest build",
 		"format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+		"generate:client": "prisma generate",
 		"start": "cd ../../ && nest start",
 		"dev": "cd ../../ && nest start --turbopack --watch",
 		"start:debug": "nest start --debug --watch",

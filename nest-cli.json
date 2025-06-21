@@ -3,8 +3,7 @@
 	"collection": "@nestjs/schematics",
 	"sourceRoot": "apps/backend/src",
 	"compilerOptions": {
-		"deleteOutDir": true,
-		"webpack": true,
+		"webpack": false,
 		"tsConfigPath": "apps/backend/tsconfig.json"
 	},
 	"monorepo": true,

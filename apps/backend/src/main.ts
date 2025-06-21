@@ -47,14 +47,16 @@ async function bootstrap() {
         .setVersion(appConfig.apiVersion)
         .addTag('api')
         .build();
+
     const document = SwaggerModule.createDocument(app, config);
-    SwaggerModule.setup('api', app, document);
+
+    SwaggerModule.setup('/api/docs', app, document, { swaggerOptions: { persistAuthorization: true } });
 
     // Start the server
     const port = appConfig.port;
     await app.listen(port);
-    console.log(`Application is running on: http://localhost:${port}`);
-    console.log(`Swagger documentation: http://localhost:${port}/api`);
+    console.log(`Application is running on: http://localhost:${port}/${appConfig.apiPrefix}`);
+    console.log(`Swagger documentation: http://localhost:${port}/api/docs`);
     console.log(`Environment: ${appConfig.nodeEnv}`);
 }
 
