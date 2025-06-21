@@ -13,15 +13,19 @@ generator client {
 datasource db {
   provider   = "postgresql"
   url        = env("DATABASE_URL")
-  extensions = [vector]
+  extensions = [pgvector(map: "vector", schema: "public")]
 }
 
 model Product {
-  id          String     @id @default(uuid())
+  id          String                      @id @default(uuid())
   name        String
   description String
-  embedding   Bytes?
+  embedding   Unsupported("vector(768)")?
+  createdAt   DateTime                    @default(now())
+  updatedAt   DateTime                    @updatedAt
   feedbacks   Feedback[]
+
+  @@map("products")
 }
 
 model Feedback {
@@ -32,4 +36,6 @@ model Feedback {
   reward    Float
   createdAt DateTime @default(now())
   product   Product  @relation(fields: [productId], references: [id])
+
+  @@map("feeedbacks")
 }

@@ -18,6 +18,7 @@ export class OpenAIService {
         });
 
         const vector = response.data.embedding;
-        return Buffer.from(Float32Array.from(vector).buffer);
+        // return Buffer.from(Float32Array.from(vector).buffer).toString('hex');
+        return vector
     }
 }
