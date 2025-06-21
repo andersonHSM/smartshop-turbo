@@ -4,6 +4,7 @@
 	"license": "MIT",
 	"version": "0.0.0",
 	"private": true,
+	"type": "module",
 	"scripts": {
 		"dev": "next dev",
 		"db:seed": "ts-node --compiler-options '{\"module\":\"CommonJS\"}' drizzle/seed.ts",
@@ -20,6 +21,7 @@
 		"@vercel/postgres": "^0.10.0",
 		"ai": "^4.3.16",
 		"autoprefixer": "10.4.21",
+		"axios": "^1.10.0",
 		"clsx": "^2.1.1",
 		"cmdk": "^1.1.1",
 		"eslint": "9.29.0",
