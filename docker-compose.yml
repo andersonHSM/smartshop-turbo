@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   db:
-    image: postgres:17-bookworm
+    image: pgvector/pgvector:pg17
     container_name: pgvector-db
     restart: always
     env_file:
