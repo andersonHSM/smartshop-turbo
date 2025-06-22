@@ -40,7 +40,6 @@ export default function Home() {
                 <div className={'w-full flex flex-col gap-4 justify-center text-center'}>
                     <h1 className='text-4xl font-bold text-blue-900'>Search your product</h1>
                     <div className='flex flex-col gap-4 justify-center  mx-auto'>
-                        <Label htmlFor='email'>Product</Label>
                         <Input
                             value={searchQuery}
                             onChange={event => setSearchQuery(event.target.value)}
