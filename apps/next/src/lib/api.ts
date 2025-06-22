@@ -17,3 +17,7 @@ export const searchProducts = async (query: string) => {
 export const syncWithAirtable = async () => {
     return axiosInstance.post('/catalog/sync');
 };
+
+export const submitFeedback = async (body: { query: string; rank: number; productId: string; reward: number }) => {
+    return axiosInstance.post('catalog/feedback', body);
+};

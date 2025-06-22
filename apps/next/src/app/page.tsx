@@ -3,7 +3,7 @@
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
-import { searchProducts, syncWithAirtable } from '@/lib/api';
+import { searchProducts, submitFeedback, syncWithAirtable } from '@/lib/api';
 
 export default function Home() {
     const [searchQuery, setSearchQuery] = useState('');
@@ -78,10 +78,22 @@ export default function Home() {
                     </div>
                 </div>
                 <div className='grid grid-cols-[1fr_1fr] gap-16'>
-                    {products.map(product => (
+                    {products.map((product, index) => (
                         <div
+                            onClick={() => {
+                                let reward = 1;
+                                if (index < 4) reward = Number((reward - index * 0.2).toPrecision(1));
+                                else reward = 0.3;
+
+                                submitFeedback({
+                                    query: searchQuery,
+                                    rank: index + 1,
+                                    productId: product.id,
+                                    reward,
+                                }).catch(console.error);
+                            }}
                             key={product.id}
-                            className='flex flex-col gap-4 border-2 p-4 rounded-md shadow-md shadow-accent'
+                            className='hover:scale-105 duration-75 flex flex-col gap-4 border-2 p-4 rounded-md shadow-md shadow-accent cursor-pointer'
                         >
                             <h2 className='text-2xl font-bold'>{product.name}</h2>
                             <p className='text-base'>{product.description}</p>
