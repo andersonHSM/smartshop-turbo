@@ -1,10 +1,9 @@
 'use client';
 
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
-import { searchProducts } from '@/lib/api';
+import { searchProducts, syncWithAirtable } from '@/lib/api';
 
 export default function Home() {
     const [searchQuery, setSearchQuery] = useState('');
@@ -50,7 +49,11 @@ export default function Home() {
                             className={'w-full'}
                         />
                         <div className={'flex gap-4 justify-center w-full'}>
-                            <Button disabled={!searchQuery} onClick={handleSubmit} className={'bg-blue-900 w-1/2'}>
+                            <Button
+                                disabled={!searchQuery}
+                                onClick={handleSubmit}
+                                className={'bg-blue-900 w-1/2 cursor-pointer'}
+                            >
                                 Submit
                             </Button>
                             <Button
@@ -59,16 +62,27 @@ export default function Home() {
                                     setProducts([]);
                                     setSearchQuery('');
                                 }}
-                                className={'bg-red-900 w-1/2'}
+                                className={'bg-red-900 w-1/2 cursor-pointer'}
                             >
                                 Clear
+                            </Button>
+                            <Button
+                                onClick={() => {
+                                    syncWithAirtable().catch(console.error);
+                                }}
+                                className={'bg-green-900 w-1/2 cursor-pointer'}
+                            >
+                                Sync with Airtable
                             </Button>
                         </div>
                     </div>
                 </div>
                 <div className='grid grid-cols-[1fr_1fr] gap-16'>
                     {products.map(product => (
-                        <div key={product.id} className='flex flex-col gap-4 border-2 p-4 rounded-md shadow-md shadow-accent'>
+                        <div
+                            key={product.id}
+                            className='flex flex-col gap-4 border-2 p-4 rounded-md shadow-md shadow-accent'
+                        >
                             <h2 className='text-2xl font-bold'>{product.name}</h2>
                             <p className='text-base'>{product.description}</p>
                         </div>

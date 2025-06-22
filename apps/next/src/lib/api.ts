@@ -13,3 +13,7 @@ const axiosInstance = axios.create({
 export const searchProducts = async (query: string) => {
     return axiosInstance.get(`/search?query=${query}`);
 };
+
+export const syncWithAirtable = async () => {
+    return axiosInstance.post('/catalog/sync');
+};
