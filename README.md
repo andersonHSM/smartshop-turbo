@@ -1,8 +1,6 @@
-# Turborepo starter
+# Product Search & Recommendation System
 
-# Turborepo Starter
-
-This is a Turborepo monorepo starter template.
+This is a Turborepo monorepo containing a product search and recommendation system with vector embeddings capabilities.
 
 ## What's inside?
 
@@ -10,11 +8,11 @@ This turborepo uses [pnpm](https://pnpm.io) as a package manager. It includes th
 
 ### Apps and Packages
 
-- `frontend`: a [Next.js](https://nextjs.org/) app running on port 3000
-- `backend`: a [NestJS](https://nestjs.com/) app running on port 3001
-- `ui`: a shared React component library
-- `eslint-config-custom`: shared `eslint` configurations
-- `tsconfig`: shared `tsconfig.json` configurations
+- `backend`: a [NestJS](https://nestjs.com/) app running on port 3001 with Prisma ORM and vector embeddings
+- `packages`: shared libraries and configurations
+  - `ui`: shared React component library
+  - `eslint-config`: shared `eslint` configurations
+  - `typescript-config`: shared `tsconfig.json` configurations
 
 ### Environment Setup
 
@@ -24,15 +22,24 @@ The project uses environment variables to configure each application. To set up 
 
 ```bash
 cp .env.example .env
-cp apps/frontend/.env.example apps/frontend/.env
 cp apps/backend/.env.example apps/backend/.env
 ```
 
 2. Edit the environment files as needed for your local setup
 
+3. Set up your PostgreSQL database with vector extension (required for embeddings functionality)
+
+### Database Setup
+
+This project uses PostgreSQL with vector extension for similarity search. The backend uses Prisma ORM to manage database operations.
+
+Make sure to:
+1. Create a PostgreSQL database
+2. Install the PostgreSQL vector extension
+3. Update your `.env` file with the database connection string
+
 ### Default Ports
 
-- Frontend: 3000
 - Backend: 3001
 
 You can change these by modifying the `.env` files in each application directory.
@@ -60,6 +67,31 @@ To develop all apps and packages, run the following command:
 ```
 pnpm dev
 ```
+
+### Database Migrations
+
+The project uses Prisma for database migrations. To create and apply migrations:
+
+```bash
+# Generate Prisma client
+pnpm -F backend exec prisma generate
+
+# Create a migration
+pnpm -F backend exec prisma migrate dev --name your_migration_name
+
+# Apply migrations to your database
+pnpm -F backend exec prisma migrate deploy
+```
+
+### Vector Database Setup
+
+This project requires PostgreSQL with vector extension. If you're using Docker, you can use the included docker-compose.yml file:
+
+```bash
+docker-compose up -d
+```
+
+This will start a PostgreSQL instance with the vector extension already installed.
 
 ### Remote Caching
 
